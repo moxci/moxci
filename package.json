@@ -1,0 +1,12 @@
+{
+  "name": "artifact-pr-notify",
+  "version": "1.0.0",
+  "description": "tool to notify artifact to pr",
+  "main": "index.js",
+  "author": "Jesse Katsumata<jesse.katsumata@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@octokit/rest": "^16.16.3",
+    "node-fetch": "^2.3.0"
+  }
+}

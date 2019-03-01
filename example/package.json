@@ -1,0 +1,6 @@
+{
+  "name": "example",
+  "scripts": {
+    "notify": "yarn artifact-pr-notify"
+  }
+}
