@@ -1,16 +1,16 @@
-const fetch = require("node-fetch");
-const octokit = require("@octokit/rest");
+// const fetch = require("node-fetch");
+const octokit = require("@octokit/rest")();
 
-module.exports = async () => {
+module.exports = async (targetPath: string) => {
   const {
     CIRCLE_PULL_REQUEST,
     CIRCLE_BUILD_NUM,
     GITHUB_TOKEN,
     CIRCLE_TOKEN,
     CIRCLE_PROJECT_USERNAME,
-    CIRCLE_PROJECT_REPONAME,
-    SLACK_WEBHOOK,
-    SLACK_CHANNEL
+    CIRCLE_PROJECT_REPONAME
+    //    SLACK_WEBHOOK,
+    //    SLACK_CHANNEL
   } = process.env;
 
   if (!CIRCLE_PROJECT_USERNAME) {
@@ -42,7 +42,7 @@ module.exports = async () => {
 
   // Github
 
-  const pullRequestId = CIRCLE_PULL_REQUEST.split("/").pop(-1);
+  const pullRequestId = CIRCLE_PULL_REQUEST.split("/").pop();
 
   fetch(
     `https://circleci.com/api/v1.1/project/github/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BUILD_NUM}/artifacts?circle-token=${CIRCLE_TOKEN}`
@@ -50,20 +50,23 @@ module.exports = async () => {
     .then(res => res.json())
     .then(
       artifacts =>
-        artifacts.filter(artifact => artifact.path.includes(targetPath))[0]
+        artifacts.filter((artifact: any) =>
+          artifact.path.includes(targetPath)
+        )[0]
     )
     .then(artifact => {
       if (!artifact) {
         throw new Error(`Cannot find any artifacts with: ${targetPath}`);
       }
 
+      /**
       // Slack
       if (SLACK_WEBHOOK && SLACK_CHANNEL) {
         try {
-          await fetch(SLACK_WEBHOOK, {
+          fetch(SLACK_WEBHOOK, {
             method: "post",
             body: JSON.stringify({
-              icon_url: iconUrl,
+              
               unfurl_links: 0,
               username: name,
               channel: channel || "",
@@ -83,7 +86,7 @@ module.exports = async () => {
       } else {
         console.log("slack webhook or slack channel is not set");
       }
-
+      **/
       octokit.authenticate({
         type: "token",
         token: GITHUB_TOKEN

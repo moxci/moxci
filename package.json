@@ -2,11 +2,24 @@
   "name": "artifact-pr-notify",
   "version": "1.0.0",
   "description": "tool to notify artifact to pr",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "bin": {
+    "artifact-notify": "./bin/run"
+  },
   "author": "Jesse Katsumata<jesse.katsumata@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "node bin/run",
+    "type-check": "tsc --noEmit"
+  },
   "dependencies": {
     "@octokit/rest": "^16.16.3",
     "node-fetch": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.1.6",
+    "typescript": "^3.3.3333"
   }
 }
