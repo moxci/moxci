@@ -16,10 +16,12 @@
   },
   "dependencies": {
     "@octokit/rest": "^16.16.3",
-    "node-fetch": "^2.3.0"
+    "axios": "^0.18.0"
   },
   "devDependencies": {
-    "@types/node-fetch": "^2.1.6",
+    "@types/axios": "^0.14.0",
+    "@types/node": "^11.11.3",
+    "dotenv": "^7.0.0",
     "typescript": "^3.3.3333"
   }
 }

@@ -1,5 +1,8 @@
-// const fetch = require("node-fetch");
-const octokit = require("@octokit/rest")();
+const axios = require("axios");
+const Octokit = require("@octokit/rest");
+
+// used for local test
+require("dotenv").config();
 
 module.exports = async (targetPath: string) => {
   const {
@@ -44,17 +47,22 @@ module.exports = async (targetPath: string) => {
 
   const pullRequestId = CIRCLE_PULL_REQUEST.split("/").pop();
 
-  fetch(
-    `https://circleci.com/api/v1.1/project/github/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BUILD_NUM}/artifacts?circle-token=${CIRCLE_TOKEN}`
-  )
-    .then(res => res.json())
+  interface AxiosResponse {
+    data: string[];
+  }
+
+  axios
+    .get(
+      `https://circleci.com/api/v1.1/project/github/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BUILD_NUM}/artifacts?circle-token=${CIRCLE_TOKEN}`
+    )
+    .then(({ data }: AxiosResponse) => data)
     .then(
-      artifacts =>
+      (artifacts: Array<any>) =>
         artifacts.filter((artifact: any) =>
           artifact.path.includes(targetPath)
         )[0]
     )
-    .then(artifact => {
+    .then((artifact: any) => {
       if (!artifact) {
         throw new Error(`Cannot find any artifacts with: ${targetPath}`);
       }
@@ -87,15 +95,12 @@ module.exports = async (targetPath: string) => {
         console.log("slack webhook or slack channel is not set");
       }
       **/
-      octokit.authenticate({
-        type: "token",
-        token: GITHUB_TOKEN
-      });
+      const octokit = new Octokit({ auth: `token ${GITHUB_TOKEN}` });
       return octokit.issues.createComment({
         owner: CIRCLE_PROJECT_USERNAME,
         repo: CIRCLE_PROJECT_REPONAME,
         number: pullRequestId,
-        body: `Storybook can be viewed here:\n${artifact.url}`
+        body: `Artifact can be viewed here:\n${artifact.url}`
       });
     })
     .then(console.log)
