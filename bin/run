@@ -1,4 +1,4 @@
-#!/usr/vin/env node
+#!/usr/bin/env node
 const exec = require("../lib");
 
 if (process.argv.length < 2) {
