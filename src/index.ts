@@ -11,10 +11,11 @@ module.exports = async (targetPath: string) => {
     GITHUB_TOKEN,
     CIRCLE_TOKEN,
     CIRCLE_PROJECT_USERNAME,
-    CIRCLE_PROJECT_REPONAME
-    //    SLACK_WEBHOOK,
-    //    SLACK_CHANNEL
+    CIRCLE_PROJECT_REPONAME,
+    SLACK_WEBHOOK
   } = process.env;
+
+  // Validation
 
   if (!CIRCLE_PROJECT_USERNAME) {
     console.error("Cannot find project username");
@@ -30,14 +31,17 @@ module.exports = async (targetPath: string) => {
     console.error("Cannot find pull request ID");
     return;
   }
+
   if (!CIRCLE_BUILD_NUM) {
     console.error("Cannot find build number");
     return;
   }
+
   if (!GITHUB_TOKEN) {
     console.error("The environment variable GITHUB_TOKEN must be required");
     return;
   }
+
   if (!CIRCLE_TOKEN) {
     console.error("The environment variable CIRCLE_TOKEN must be required");
     return;
@@ -67,34 +71,26 @@ module.exports = async (targetPath: string) => {
         throw new Error(`Cannot find any artifacts with: ${targetPath}`);
       }
 
-      /**
       // Slack
-      if (SLACK_WEBHOOK && SLACK_CHANNEL) {
+      if (SLACK_WEBHOOK) {
         try {
-          fetch(SLACK_WEBHOOK, {
-            method: "post",
-            body: JSON.stringify({
-              
-              unfurl_links: 0,
-              username: name,
-              channel: channel || "",
-              attachments: [
-                {
-                  title: CIRCLE_PULL_REQUEST,
-                  title_link: CIRCLE_PULL_REQUEST || null,
-                  text: `Storybook can be viewed here:\n${artifact.url}`,
-                  ts: new Date().getTime() / 1000
-                }
-              ]
-            })
+          axios.post(SLACK_WEBHOOK, {
+            attachments: [
+              {
+                title: "Your Artifact is Here!",
+                text: `New artifact arrived from *CircleCI.* \n Your Artifact can be viewed here:\n${
+                  artifact.url
+                }`
+              }
+            ]
           });
-        } catch (e) {
-          console.log("error:", e);
+        } catch (error) {
+          console.log("error:", error);
         }
       } else {
         console.log("slack webhook or slack channel is not set");
       }
-      **/
+
       const octokit = new Octokit({ auth: `token ${GITHUB_TOKEN}` });
       return octokit.issues.createComment({
         owner: CIRCLE_PROJECT_USERNAME,
@@ -102,7 +98,5 @@ module.exports = async (targetPath: string) => {
         number: pullRequestId,
         body: `Artifact can be viewed here:\n${artifact.url}`
       });
-    })
-    .then(console.log)
-    .catch(console.error);
+    });
 };
