@@ -1,6 +1,9 @@
 {
   "name": "example",
   "scripts": {
-    "notify": "yarn artifact-pr-notify"
+    "klank": "klank artifact/index.html"
+  },
+  "devDependencies": {
+    "klank": "^0.0.1"
   }
 }
