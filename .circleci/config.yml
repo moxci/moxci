@@ -28,6 +28,15 @@ commands:
       - run:
           name: "Typecheck"
           command: yarn type-check
+  setup_and_build:
+    steps:
+      - checkout
+      - restore_module_cache: { module_path: ./ }
+      - run: yarn
+      - save_module_cache: { module_path: ./ }
+      - run:
+          name: "Build"
+          command: yarn build
       - store_artifacts:
           path: example
 jobs:
@@ -37,6 +46,13 @@ jobs:
     working_directory: ~/app
     steps:
       - setup_and_test
+  build:
+    docker:
+      - image: circleci/node:8.11.3
+    working_directory: ~/app
+    steps:
+      - setup_and_test
+      - setup_and_build
 
 workflows:
   version: 2.1

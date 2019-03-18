@@ -1,0 +1,25 @@
+version: 2.1
+
+commands:
+  setup_and_test:
+    steps:
+      - checkout
+      - run: yarn
+      - store_artifacts:
+          path: artifact
+      - run:
+          name: "Notify Artifact in PR"
+          command: yarn klank
+jobs:
+  test:
+    docker:
+      - image: circleci/node:8.11.3
+    working_directory: ~/app
+    steps:
+      - setup_and_test
+
+workflows:
+  version: 2.1
+  test_workflow:
+    jobs:
+      - test
