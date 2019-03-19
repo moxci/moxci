@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "publish": "yarn build",
-    "test": "node bin/run",
+    "test": "node src/index.test.ts",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

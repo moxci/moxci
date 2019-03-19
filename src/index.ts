@@ -2,9 +2,6 @@ import { notifySlack } from "./slack-notify";
 import { getArtifactUrl } from "./get-artifact";
 import { notifyGithubPr } from "./github-notify";
 
-// used for local test
-require("dotenv").config();
-
 module.exports = async (targetPath: string) => {
   const {
     CIRCLE_PULL_REQUEST,
