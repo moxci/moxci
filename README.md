@@ -1,5 +1,7 @@
 # :hammer_and_wrench: Klank [![CircleCI](https://circleci.com/gh/Naturalclar/klank.svg?style=shield)]
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Naturalclar/klank.svg)](https://greenkeeper.io/)
+
 **Klank** is a tool that will send notification to Pull Requests and Slack channel a Pull Request is made.
 It will send the url of CircleCI artifact
 
