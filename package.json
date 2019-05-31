@@ -1,6 +1,6 @@
 {
   "name": "klank",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "tool to notify artifact to pr",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
