@@ -16,7 +16,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@octokit/rest": "16.27.0",
+    "@octokit/rest": "16.27.3",
     "axios": "^0.18.0"
   },
   "devDependencies": {
