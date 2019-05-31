@@ -1,6 +1,6 @@
 {
   "name": "klank",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "tool to notify artifact to pr",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -21,7 +21,6 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
-    "@types/node": "^12.0.2",
     "@types/node": "^12.0.2",
     "dotenv": "^8.0.0",
     "typescript": "^3.3.3333"
