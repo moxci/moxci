@@ -1,14 +1,22 @@
 {
   "name": "klank",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "tool to notify artifact to pr",
+  "homepage": "https://github.com/Naturalclar/klank#readme",
+  "repository": "https://github.com/Naturalclar/klank.git",
+  "license": "MIT",
+  "author": "Jesse Katsumata<jesse.katsumata@gmail.com>",
+  "files": [
+    "bin",
+    "lib",
+    "package.json",
+    "README.md"
+  ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "bin": {
     "klank": "./bin/run"
   },
-  "author": "Jesse Katsumata<jesse.katsumata@gmail.com>",
-  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "publish": "yarn && yarn build",

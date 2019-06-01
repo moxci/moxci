@@ -1,11 +1,11 @@
-# :hammer_and_wrench: Klank 
+# :hammer_and_wrench: Klank
 
 ![CircleCI](https://circleci.com/gh/Naturalclar/klank.svg?style=shield)
 [![Greenkeeper badge](https://badges.greenkeeper.io/Naturalclar/klank.svg)](https://greenkeeper.io/)
 [![npm version](https://badge.fury.io/js/klank.svg)](https://badge.fury.io/js/klank)
 
-**Klank** is a tool that will send notification to Pull Requests and Slack channel a Pull Request is made.
-It will send the url of CircleCI artifact
+**Klank** is a tool that will send notification to Pull Requests and Slack channel when a Pull Request is made.
+It will send the url of the CircleCI artifact.
 
 This repository is inspired by [expo-qr-notify](https://github.com/watanabeyu/expo-qr-notify) by [@watanabeyu](https://github.com/watanabeyu)
 
