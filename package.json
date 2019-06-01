@@ -1,6 +1,6 @@
 {
   "name": "klank",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "tool to notify artifact to pr",
   "homepage": "https://github.com/Naturalclar/klank#readme",
   "repository": "https://github.com/Naturalclar/klank.git",
