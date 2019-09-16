@@ -2,7 +2,7 @@
 const exec = require("../lib");
 
 if (process.argv.length < 2) {
-  console.log("usage: artifact-notify [path-to-artifact]");
+  console.log("usage: moxci [path-to-artifact]");
 }
 
 const [targetPath] = process.argv.slice(2);

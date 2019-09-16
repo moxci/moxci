@@ -1,9 +1,9 @@
 {
-  "name": "klank",
-  "version": "0.0.5",
+  "name": "moxci",
+  "version": "0.0.1",
   "description": "tool to notify artifact to pr",
-  "homepage": "https://github.com/Naturalclar/klank#readme",
-  "repository": "https://github.com/Naturalclar/klank.git",
+  "homepage": "https://github.com/moxci/moxci#readme",
+  "repository": "https://github.com/moxci/moxci.git",
   "license": "MIT",
   "author": "Jesse Katsumata<jesse.katsumata@gmail.com>",
   "files": [
@@ -15,7 +15,7 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "bin": {
-    "klank": "./bin/run"
+    "mocxi": "./bin/run"
   },
   "scripts": {
     "build": "tsc",

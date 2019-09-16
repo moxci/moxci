@@ -1,10 +1,10 @@
-# :hammer_and_wrench: Klank
+# :hammer_and_wrench: Moxci
 
-![CircleCI](https://circleci.com/gh/Naturalclar/klank.svg?style=shield)
-[![Greenkeeper badge](https://badges.greenkeeper.io/Naturalclar/klank.svg)](https://greenkeeper.io/)
-[![npm version](https://badge.fury.io/js/klank.svg)](https://badge.fury.io/js/klank)
+![CircleCI](https://circleci.com/gh/moxci/moxci.svg?style=shield)
+[![Greenkeeper badge](https://badges.greenkeeper.io/moxci/moxci.svg)](https://greenkeeper.io/)
+[![npm version](https://badge.fury.io/js/moxci.svg)](https://badge.fury.io/js/moxci)
 
-**Klank** is a tool that will send notification to Pull Requests and Slack channel when a Pull Request is made.
+**Moxci** is a tool that will send notification to Pull Requests and Slack channel when a Pull Request is made.
 It will send the url of the CircleCI artifact.
 
 This repository is inspired by [expo-qr-notify](https://github.com/watanabeyu/expo-qr-notify) by [@watanabeyu](https://github.com/watanabeyu)
@@ -16,12 +16,12 @@ It can be used to send a link of latest [storybook](https://storybook.js.org/) b
 # :package: Installation
 
 ```
-yarn add -D klank
+yarn add -D moxci
 ```
 
 # :book: Example
 
-In order to user Klank, you will need to set up a [CircleCI](https://circleci.com/sunset1-0/) project.
+In order to user moxci, you will need to set up a [CircleCI](https://circleci.com/sunset1-0/) project.
 
 In your **Project Settings** -> **Environment Variables**, enter your Circle CI API Token as `CIRCLE_TOKEN`, and Github API Token as `GITHUB_TOKEN`
 
@@ -41,7 +41,7 @@ When you send a Pull Request, the account tied to your `GITHUB_TOKEN` will send 
 
 ## Slack Integration
 
-Klank can also notify your CircleCI artifact to your slack channel!
+moxci can also notify your CircleCI artifact to your slack channel!
 
 Create an [incoming webhook](https://api.slack.com/incoming-webhooks) for your slack channel that you would like to notify.
 

@@ -9,7 +9,7 @@ commands:
           path: artifact
       - run:
           name: "Notify Artifact in PR"
-          command: yarn klank
+          command: yarn moxci
 jobs:
   test:
     docker:
