@@ -1,9 +1,9 @@
 {
   "name": "example",
   "scripts": {
-    "klank": "klank artifact/index.html"
+    "moxci": "moxci artifact/index.html"
   },
   "devDependencies": {
-    "klank": "^0.0.5"
+    "moxci": "^0.0.1"
   }
 }

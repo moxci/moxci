@@ -1,5 +1,5 @@
-const klank = require("../lib");
+const moxci = require("../lib");
 // used for local test
 require("dotenv").config();
 
-klank("example/index.html");
+moxci("example/index.html");
