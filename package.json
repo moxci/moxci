@@ -15,7 +15,7 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "bin": {
-    "mocxi": "./bin/run"
+    "moxci": "./bin/run"
   },
   "scripts": {
     "build": "tsc",
