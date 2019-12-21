@@ -1,6 +1,11 @@
 version: 2.1
 
 commands:
+  yarn:
+    steps:
+      - run:
+          name: "Install dependencies"
+          command: yarn
   restore_module_cache:
     parameters:
       module_path:
@@ -23,7 +28,7 @@ commands:
     steps:
       - checkout
       - restore_module_cache: { module_path: ./ }
-      - run: yarn
+      - yarn
       - save_module_cache: { module_path: ./ }
       - run:
           name: "Typecheck"
@@ -32,23 +37,29 @@ commands:
     steps:
       - checkout
       - restore_module_cache: { module_path: ./ }
-      - run: yarn
+      - yarn
       - save_module_cache: { module_path: ./ }
       - run:
           name: "Build"
           command: yarn build
       - store_artifacts:
-          path: example
+          path: example/artifact
+      - run:
+          name: "Test"
+          command: ./bin/run example/artifact/index.html
+      - run:
+          name: "Test with custom message"
+          command: ./bin/run example/artifact/index.html -m "Custom Message"
 jobs:
   test:
     docker:
-      - image: circleci/node:8.11.3
+      - image: circleci/node:8.17.0
     working_directory: ~/app
     steps:
       - setup_and_test
   build:
     docker:
-      - image: circleci/node:8.11.3
+      - image: circleci/node:8.17.0
     working_directory: ~/app
     steps:
       - setup_and_test
@@ -59,3 +70,4 @@ workflows:
   test_workflow:
     jobs:
       - test
+      - build
