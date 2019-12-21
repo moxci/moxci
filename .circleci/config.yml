@@ -70,3 +70,4 @@ workflows:
   test_workflow:
     jobs:
       - test
+      - build
