@@ -46,10 +46,10 @@ commands:
           path: example/artifact
       - run:
           name: "Test"
-          command: npx moxci example/artifact/index.html
+          command: ./bin/run example/artifact/index.html
       - run:
           name: "Test with custom message"
-          command: npx moxci example/artifact/index.html -m "Custom Message"
+          command: ./bin/run example/artifact/index.html -m "Custom Message"
 jobs:
   test:
     docker:
