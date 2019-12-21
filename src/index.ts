@@ -2,7 +2,11 @@ import { notifySlack } from "./slack-notify";
 import { getArtifactUrl } from "./get-artifact";
 import { notifyGithubPr } from "./github-notify";
 
-module.exports = async (targetPath: string) => {
+type Options = {
+  message: string;
+};
+
+export const moxci = async (targetPath: string, options: Options) => {
   const {
     CIRCLE_PULL_REQUEST,
     CIRCLE_BUILD_NUM,
@@ -57,13 +61,14 @@ module.exports = async (targetPath: string) => {
       console.error("Invalid Pull Request Id");
       return;
     }
-    notifyGithubPr(
-      CIRCLE_PROJECT_USERNAME,
-      CIRCLE_PROJECT_REPONAME,
-      pullRequestId,
-      GITHUB_TOKEN,
-      artifactUrl
-    );
+    notifyGithubPr({
+      owner: CIRCLE_PROJECT_USERNAME,
+      repo: CIRCLE_PROJECT_REPONAME,
+      number: pullRequestId,
+      token: GITHUB_TOKEN,
+      artifactUrl,
+      body: options.message
+    });
   } else {
     console.log("Github Token is not set or invalid");
   }
