@@ -4,8 +4,8 @@ commands:
   yarn:
     steps:
       - run:
-        name: "Install dependencies"
-        command: yarn
+          name: "Install dependencies"
+          command: yarn
   restore_module_cache:
     parameters:
       module_path:
