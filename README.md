@@ -1,7 +1,6 @@
-# :hammer_and_wrench: Moxci
+<h1 align="center"><img src="https://github.com/moxci.png" width="36px"/> Moxci</h1>
 
 ![CircleCI](https://circleci.com/gh/moxci/moxci.svg?style=shield)
-[![Greenkeeper badge](https://badges.greenkeeper.io/moxci/moxci.svg)](https://greenkeeper.io/)
 [![npm version](https://badge.fury.io/js/moxci.svg)](https://badge.fury.io/js/moxci)
 
 **Moxci** is a tool that will send notification to Pull Requests and Slack channel when a Pull Request is made.
