@@ -1,9 +1,9 @@
-const Octokit = require("@octokit/rest");
+import Octokit from "@octokit/rest";
 
 type Props = {
   owner: string;
   repo: string;
-  number: string | number;
+  issue_number: number;
   token: string;
   artifactUrl: string;
   body: string;
@@ -12,7 +12,7 @@ type Props = {
 export const notifyGithubPr = async ({
   owner,
   repo,
-  number,
+  issue_number,
   token,
   artifactUrl,
   body
@@ -21,7 +21,7 @@ export const notifyGithubPr = async ({
   return octokit.issues.createComment({
     owner,
     repo,
-    number,
+    issue_number,
     body: `${body}:\n${artifactUrl}`
   });
 };
