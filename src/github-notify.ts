@@ -3,7 +3,7 @@ import Octokit from "@octokit/rest";
 type Props = {
   owner: string;
   repo: string;
-  number: string | number;
+  issue_number: number;
   token: string;
   artifactUrl: string;
   body: string;
@@ -12,16 +12,11 @@ type Props = {
 export const notifyGithubPr = async ({
   owner,
   repo,
-  number,
+  issue_number,
   token,
   artifactUrl,
   body
 }: Props) => {
-  const issue_number = Number(number)
-  if (Number.isNaN(issue_number)) {
-    console.error("Invalid Pull Request Id");
-    return;
-  }
   const octokit = new Octokit({ auth: `token ${token}` });
   return octokit.issues.createComment({
     owner,

@@ -56,7 +56,7 @@ export const moxci = async (targetPath: string, options: Options) => {
 
   // Github
   if (GITHUB_TOKEN) {
-    const pullRequestId = CIRCLE_PULL_REQUEST.split("/").pop();
+    const pullRequestId = Number(CIRCLE_PULL_REQUEST.split("/").pop());
     if (!pullRequestId) {
       console.error("Invalid Pull Request Id");
       return;
@@ -64,7 +64,7 @@ export const moxci = async (targetPath: string, options: Options) => {
     notifyGithubPr({
       owner: CIRCLE_PROJECT_USERNAME,
       repo: CIRCLE_PROJECT_REPONAME,
-      number: pullRequestId,
+      issue_number: pullRequestId,
       token: GITHUB_TOKEN,
       artifactUrl,
       body: options.message
