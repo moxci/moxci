@@ -1,6 +1,6 @@
 {
   "name": "moxci",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "tool to notify artifact to pr",
   "homepage": "https://github.com/moxci/moxci#readme",
   "repository": "https://github.com/moxci/moxci.git",
