@@ -28,11 +28,13 @@ In your **Project Settings** -> **Environment Variables**, enter your Circle CI 
 
 In your `config.yml` for CircleCI, add commands to specify the path that contains the artifact you'd like to notify.
 
-<img width="265" src="https://user-images.githubusercontent.com/6936373/54510173-a641ec80-498f-11e9-9af6-dcb4f126b6b7.png">
-
-In your `package.json`, specify the file you'd like to notify
-
-<img width="293" alt="Screenshot 2019-03-18 15 10 34" src="https://user-images.githubusercontent.com/6936373/54510276-fde05800-498f-11e9-87d6-6de5f3dc8850.png">
+```yml
+- store_artifacts:
+    path: artifact
+- run:
+    name: "Notify Artifact in Pull Request"
+    command: npx moxci path/to/artifact
+```
 
 When you send a Pull Request, the account tied to your `GITHUB_TOKEN` will send a link of the artifact.
 
