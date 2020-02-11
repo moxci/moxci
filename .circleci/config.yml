@@ -48,8 +48,11 @@ commands:
           name: "Test"
           command: ./bin/run example/artifact/index.html
       - run:
-          name: "Test with custom message"
+          name: "Test with custom PR message"
           command: ./bin/run example/artifact/index.html -m "Custom Message"
+      - run:
+          name: "Test with custom Slack notification message"
+          command: ./bin/run example/artifact/index.html -s "Custom Notification"
 jobs:
   test:
     docker:
