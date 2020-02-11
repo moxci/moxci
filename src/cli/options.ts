@@ -16,6 +16,12 @@ const cmd = yargs
     default: "Artifact can be viewed here: ",
     description: "Message to be displayed in the github comment"
   })
+  .option("slack_message", {
+    alias: "s",
+    type: "string",
+    default: "New artifact arrived from *CircleCI.* \n Your Artifact can be viewed here:",
+    description: "Message to be displayed in the Slack notification"
+  })
   .example(
     "$0 /path/to/artifact/index.html",
     "Notifies given artifact to github pull request"
@@ -23,6 +29,10 @@ const cmd = yargs
   .example(
     '$0 /path/to/artifact/myAwesomeApp.jar -m "Built package can be downloaded at:"',
     "With custom message"
+  )
+  .example(
+      '$0 /path/to/artifact/index.html -s "Test report can be viewed at:"',
+      "With custom slack notification message"
   )
   .epilogue(
     `For more information, please visit our repository at:\nhttps://github.com/${repository}`

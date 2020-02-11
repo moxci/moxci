@@ -4,6 +4,7 @@ import { notifyGithubPr } from "./github-notify";
 
 type Options = {
   message: string;
+  slack_message: string;
 };
 
 export const moxci = async (targetPath: string, options: Options) => {
@@ -49,7 +50,11 @@ export const moxci = async (targetPath: string, options: Options) => {
 
   // Slack
   if (SLACK_WEBHOOK) {
-    notifySlack(SLACK_WEBHOOK, artifactUrl);
+    notifySlack(
+        SLACK_WEBHOOK,
+        artifactUrl,
+        options.slack_message
+    );
   } else {
     console.log("Slack webhook is not set or invalid");
   }
