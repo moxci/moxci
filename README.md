@@ -8,14 +8,29 @@ It will send the url of the CircleCI artifact.
 
 This repository is inspired by [expo-qr-notify](https://github.com/watanabeyu/expo-qr-notify) by [@watanabeyu](https://github.com/watanabeyu)
 
-It can be used to send a link of latest [storybook](https://storybook.js.org/) built in the Pull Request.
+It can be used to send a link of latest [storybook](https://storybook.js.org/), or preview of your website built in the Pull Request.
 
 <img src="https://user-images.githubusercontent.com/6936373/54509684-b6f16300-498d-11e9-9457-44bc56bc669c.png" width="80%" />
 
 # :package: Installation
 
+You can install moxci via `npm` or `yarn`
+
+```
+npm install moxci
+```
+
+or
+
 ```
 yarn add -D moxci
+```
+
+You can also run moxci in your CI wirhout installing the package by using `npx`.
+By using this, you will always be running the latest `moxci` package.
+
+```
+npx moxci /path/to/artifact
 ```
 
 # :book: Example
@@ -38,7 +53,6 @@ In your `config.yml` for CircleCI, add commands to specify the path that contain
 
 When you send a Pull Request, the account tied to your `GITHUB_TOKEN` will send a link of the artifact.
 
-<img src="https://user-images.githubusercontent.com/6936373/54509831-3f700380-498e-11e9-9180-2b49343aa2ae.png" width="80%">
 
 ## Slack Integration
 
