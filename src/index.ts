@@ -53,7 +53,7 @@ export const moxci = async (targetPath: string, options: Options) => {
     notifySlack(
         SLACK_WEBHOOK,
         artifactUrl,
-        options.slack_message
+        options.slack_message || options.message,
     );
   } else {
     console.log("Slack webhook is not set or invalid");

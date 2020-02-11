@@ -19,7 +19,7 @@ const cmd = yargs
   .option("slack_message", {
     alias: "s",
     type: "string",
-    default: "New artifact arrived from *CircleCI.* \n Your Artifact can be viewed here:",
+    default: "",
     description: "Message to be displayed in the Slack notification"
   })
   .example(
