@@ -45,11 +45,17 @@ commands:
       - store_artifacts:
           path: example/artifact
       - run:
-          name: "Test"
+          name: "Test with a default message sent to both GitHub & Slack"
           command: ./bin/run example/artifact/index.html
       - run:
-          name: "Test with custom message"
+          name: "Test with a custom message sent to both GitHub & Slack"
           command: ./bin/run example/artifact/index.html -m "Custom Message"
+      - run:
+          name: "Test with a default GitHub message and a custom Slack notification message"
+          command: ./bin/run example/artifact/index.html -s "Custom Slack Notification"
+      - run:
+          name: "Test with a custom GitHub message and a custom Slack notification"
+          command: ./bin/run example/artifact/index.html -m "Custom GitHub message" -s "Custom Slack Notification"
 jobs:
   test:
     docker:
