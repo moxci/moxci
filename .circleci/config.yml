@@ -49,13 +49,14 @@ commands:
           command: ./bin/run example/artifact/index.html
       - run:
           name: "Test with a custom message sent to both GitHub & Slack"
-          command: ./bin/run example/artifact/index.html -m "Custom Message"
+          command: ./bin/run example/artifact/index.html -l "Custom Message" -m "Custom Message"
       - run:
           name: "Test with a default GitHub message and a custom Slack notification message"
-          command: ./bin/run example/artifact/index.html -s "Custom Slack Notification"
+          command: ./bin/run example/artifact/index.html -l "Custom Slack Message" -s "Custom Slack Notification"
       - run:
           name: "Test with a custom GitHub message and a custom Slack notification"
-          command: ./bin/run example/artifact/index.html -m "Custom GitHub message" -s "Custom Slack Notification"
+          command: ./bin/run example/artifact/index.html -l "Custom Slack Message with Custom Github Message" -m "Custom GitHub message" -s "Custom Slack Notification"
+
 jobs:
   test:
     docker:

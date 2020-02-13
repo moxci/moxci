@@ -1,10 +1,11 @@
 import { notifySlack } from "./slack-notify";
 import { getArtifactUrl } from "./get-artifact";
 import { notifyGithubPr } from "./github-notify";
-
+import { notifyGithubCiStatus } from "./github-create-status";
 type Options = {
   message: string;
   slack_message: string;
+  label: string;
 };
 
 export const moxci = async (targetPath: string, options: Options) => {
@@ -15,6 +16,7 @@ export const moxci = async (targetPath: string, options: Options) => {
     CIRCLE_TOKEN,
     CIRCLE_PROJECT_USERNAME,
     CIRCLE_PROJECT_REPONAME,
+    CIRCLE_SHA1,
     SLACK_WEBHOOK
   } = process.env;
 
@@ -30,11 +32,6 @@ export const moxci = async (targetPath: string, options: Options) => {
     return;
   }
 
-  if (!CIRCLE_PULL_REQUEST) {
-    console.error("Cannot find pull request ID");
-    return;
-  }
-
   if (!CIRCLE_BUILD_NUM) {
     console.error("Cannot find build number");
     return;
@@ -45,15 +42,24 @@ export const moxci = async (targetPath: string, options: Options) => {
     return;
   }
 
+  if (!CIRCLE_SHA1) {
+    console.error("Cannot find commit SHA");
+    return;
+  }
+
+  if (!CIRCLE_PULL_REQUEST) {
+    console.log("CIRCLE_PULL_REQUEST is empty");
+  }
+
   const circleciApiUrl = `https://circleci.com/api/v1.1/project/github/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BUILD_NUM}/artifacts?circle-token=${CIRCLE_TOKEN}`;
   const artifactUrl = await getArtifactUrl(circleciApiUrl, targetPath);
 
   // Slack
   if (SLACK_WEBHOOK) {
     notifySlack(
-        SLACK_WEBHOOK,
-        artifactUrl,
-        options.slack_message || options.message,
+      SLACK_WEBHOOK,
+      artifactUrl,
+      options.slack_message || options.message
     );
   } else {
     console.log("Slack webhook is not set or invalid");
@@ -61,18 +67,30 @@ export const moxci = async (targetPath: string, options: Options) => {
 
   // Github
   if (GITHUB_TOKEN) {
-    const pullRequestId = Number(CIRCLE_PULL_REQUEST.split("/").pop());
-    if (!pullRequestId) {
-      console.error("Invalid Pull Request Id");
-      return;
+    if (CIRCLE_PULL_REQUEST) {
+      const pullRequestId = Number(CIRCLE_PULL_REQUEST.split("/").pop());
+      if (!pullRequestId) {
+        console.error("Invalid Pull Request Id");
+        return;
+      }
+      notifyGithubPr({
+        owner: CIRCLE_PROJECT_USERNAME,
+        repo: CIRCLE_PROJECT_REPONAME,
+        issue_number: pullRequestId,
+        token: GITHUB_TOKEN,
+        artifactUrl,
+        body: options.message
+      });
     }
-    notifyGithubPr({
+
+    notifyGithubCiStatus({
       owner: CIRCLE_PROJECT_USERNAME,
       repo: CIRCLE_PROJECT_REPONAME,
-      issue_number: pullRequestId,
       token: GITHUB_TOKEN,
       artifactUrl,
-      body: options.message
+      body: options.message,
+      sha: CIRCLE_SHA1,
+      context: options.label
     });
   } else {
     console.log("Github Token is not set or invalid");
