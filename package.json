@@ -19,12 +19,12 @@
   },
   "scripts": {
     "build": "tsc",
-    "prepublish": "yarn && yarn build",
+    "prepublishOnly": "yarn && yarn build",
     "test": "node src/index.test.ts",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@octokit/rest": "16.28.8",
+    "@octokit/rest": "16.43.1",
     "axios": "^0.19.0",
     "yargs": "^15.0.2"
   },
