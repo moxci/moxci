@@ -19,7 +19,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "publish": "yarn && yarn build",
+    "prepublish": "yarn && yarn build",
     "test": "node src/index.test.ts",
     "type-check": "tsc --noEmit"
   },
